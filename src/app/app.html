@@ -11,49 +11,52 @@
         class="profile-card relative h-full w-full rounded-2xl bg-shiba-card shadow-xl ring-1 ring-shiba-sand/25"
       >
         <!-- Fixed artboard: 480 × 576 CSS px / 1000 × 1200 design px. -->
-        <img
-          src="/scrapbook/washi.png"
-          alt=""
-          class="pointer-events-none absolute -top-[2%] left-[8%] aspect-[4/1] w-[80%] h-[4%] object-cover shadow-sm"
-          aria-hidden="true"
-        />
-        <img
-          src="/scrapbook/glitter-star.png"
-          alt=""
-          class="pointer-events-none absolute -left-[15%] top-[0%] w-[30%] -rotate-15"
-          aria-hidden="true"
-        />
-        <img
-          src="/scrapbook/glitter-star-2.png"
-          alt=""
-          class="pointer-events-none absolute -right-[10%] top-[45%] w-[20%] rotate-15 z-2"
-          aria-hidden="true"
-        />
-        <app-language-switch
-          [language]="language()"
-          [label]="copy().languageLabel"
-          (languageChange)="setLanguage($event)"
-        />
+        <!-- Decorative layer: position the tape relative to the card. -->
+        <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+          <img
+            src="/scrapbook/washi.png"
+            alt=""
+            class="absolute -top-[2%] left-[8%] h-[4%] w-[80%] object-cover shadow-sm"
+          />
+        </div>
 
-        <header class="absolute inset-0" data-reveal>
-          <img
-            src="/shibabox-logo.png"
-            alt="Shibabox"
-            class="absolute left-[25%] top-[10%] -translate-x-1/2 h-auto w-[35%] select-none drop-shadow-sm"
-          />
-          <img
-            src="/scrapbook/approved.png"
-            alt="Shiba-approved"
-            class="absolute left-[25%] top-[43%] -translate-x-1/2 h-auto w-[30%] select-none drop-shadow-sm"
-          />
-          <div class="absolute left-[45%] top-[10%] h-[50%] w-[50%] px-7 py-7">
+        <!-- Intro group: position and size logo, sticker and note together here. -->
+        <header
+          class="absolute left-[5%] top-[8%] grid h-[50%] w-[90%] grid-cols-[40%_1fr] gap-[4%]"
+          data-reveal
+        >
+          <!-- Brand group: logo and sticker stay together. -->
+          <div class="flex h-full flex-col items-center gap-3">
             <img
-              src="/scrapbook/note.png"
+              src="/shibabox-logo.png"
+              alt="Shibabox"
+              class="h-auto w-full select-none drop-shadow-sm"
+            />
+            <img
+              src="/scrapbook/approved.png"
+              alt="Shiba-approved"
+              class="h-auto w-[83%] select-none drop-shadow-sm"
+            />
+          </div>
+
+          <!-- Copy group: a quiet background keeps the text readable without competing with it. -->
+          <div
+            class="relative flex min-h-[16.5rem] self-start flex-col rounded-lg bg-white/50 p-5 shadow-sm ring-1 ring-inset ring-shiba-sand/25"
+          >
+            <img
+              src="/scrapbook/glitter-star.png"
               alt=""
-              class="pointer-events-none absolute inset-0 h-full w-full object-fill drop-shadow-md"
+              class="pointer-events-none absolute -left-6 -top-5 z-[2] w-10 -rotate-12"
               aria-hidden="true"
             />
-            <div class="inset-0 relative z-[1]">
+            <img
+              src="/scrapbook/glitter-star-2.png"
+              alt=""
+              class="pointer-events-none absolute -bottom-5 -right-5 z-[2] w-9 rotate-12"
+              aria-hidden="true"
+            />
+
+            <div class="flex flex-1 flex-col justify-center pb-3">
               <h1 class="language-copy text-lg font-semibold leading-tight">
                 {{ copy().introTitle }}
               </h1>
@@ -61,9 +64,19 @@
                 {{ copy().introText }}
               </p>
             </div>
+
+            <!-- The language switch belongs to the copy and follows its local layout. -->
+            <div class="self-end pt-4">
+              <app-language-switch
+                [language]="language()"
+                [label]="copy().languageLabel"
+                (languageChange)="setLanguage($event)"
+              />
+            </div>
           </div>
         </header>
 
+        <!-- Link group: reposition all links through this one nav container. -->
         <nav
           class="absolute bottom-[4%] left-[5%] right-[5%] flex flex-col gap-2"
           aria-label="Shibabox links"
