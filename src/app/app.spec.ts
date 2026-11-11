@@ -19,6 +19,6 @@ describe('App', () => {
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('img[alt="Shibabox"]')).toBeTruthy();
-    expect(compiled.querySelectorAll('nav[aria-label="Shibabox links"] a')).toHaveLength(2);
+    expect(compiled.querySelectorAll('nav[aria-label="Shibabox links"] a')).toHaveLength(3);
   });
 });
