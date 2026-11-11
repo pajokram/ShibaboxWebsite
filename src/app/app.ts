@@ -50,14 +50,14 @@ export class App implements AfterViewInit, OnDestroy {
       key: 'etsy',
       href: 'https://www.etsy.com/shop/Shibabox',
       icon: '/icons/etsy.svg',
-      colors: 'bg-[#f2b705] text-[#30180d]',
+      colors: 'bg-shiba-brown text-shiba-card hover:bg-shiba-brown/90',
       label: { de: 'Zum Etsy-Shop', en: 'Visit Etsy shop' },
     },
     {
       key: 'instagram',
       href: 'https://www.instagram.com/shibabox/',
       icon: '/icons/instagram.svg',
-      colors: 'bg-[#f47c48] text-[#30180d]',
+      colors: 'bg-shiba-coral text-shiba-brown hover:bg-shiba-coral/90',
       label: { de: 'Zu Instagram', en: 'Open Instagram' },
     },
   ];

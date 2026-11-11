@@ -1,1 +1,10 @@
 @import 'tailwindcss';
+
+@theme {
+  --color-shiba-cream: #fff7e5;
+  --color-shiba-honey: #f7c447;
+  --color-shiba-coral: #f47d50;
+  --color-shiba-brown: #492a1b;
+  --color-shiba-sand: #d7a174;
+  --color-shiba-card: #fffaee;
+}
