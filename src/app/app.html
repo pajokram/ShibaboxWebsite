@@ -1,72 +1,96 @@
 <main
   #page
-  class="relative z-10 grid min-h-dvh w-full place-items-center overflow-x-hidden p-4 font-sans text-shiba-brown sm:p-6"
+  class="relative z-10 grid h-dvh w-full grid-cols-[minmax(0,1fr)] place-items-center overflow-hidden p-4 font-sans text-shiba-brown sm:p-6"
 >
-  <article
-    class="profile-card relative w-full max-w-lg rounded-3xl bg-shiba-card p-5 shadow-xl ring-1 ring-shiba-sand/25 sm:p-8"
-  >
+  <div class="relative" [style.width.px]="cardFrameWidth()" [style.height.px]="cardFrameHeight()">
     <div
-      class="absolute right-4 top-4 z-10 flex rounded-full bg-shiba-cream p-1 shadow-sm ring-1 ring-shiba-sand/35 sm:right-6 sm:top-6"
-      role="group"
-      [attr.aria-label]="copy().languageLabel"
-      data-reveal
+      class="absolute left-0 top-0 h-[576px] w-[480px] origin-top-left"
+      [style.transform]="'scale(' + cardScale() + ')'"
     >
-      <button
-        type="button"
-        class="min-h-9 min-w-10 rounded-full px-2.5 py-1 text-[0.65rem] font-bold text-shiba-brown transition-colors duration-200 hover:bg-shiba-honey/35 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-shiba-brown"
-        [class]="language() === 'de' ? 'bg-shiba-brown text-shiba-card shadow-sm' : ''"
-        [attr.aria-pressed]="language() === 'de'"
-        (click)="setLanguage('de')"
+      <article
+        class="profile-card relative h-full w-full rounded-2xl bg-shiba-card shadow-xl ring-1 ring-shiba-sand/25"
       >
-        DE
-      </button>
-      <button
-        type="button"
-        class="min-h-9 min-w-10 rounded-full px-2.5 py-1 text-[0.65rem] font-bold text-shiba-brown transition-colors duration-200 hover:bg-shiba-honey/35 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-shiba-brown"
-        [class]="language() === 'en' ? 'bg-shiba-brown text-shiba-card shadow-sm' : ''"
-        [attr.aria-pressed]="language() === 'en'"
-        (click)="setLanguage('en')"
-      >
-        EN
-      </button>
-    </div>
+        <!-- Fixed artboard: 480 × 576 CSS px / 1000 × 1200 design px. -->
+        <img
+          src="/scrapbook/washi.png"
+          alt=""
+          class="pointer-events-none absolute -top-[2%] left-[8%] aspect-[4/1] w-[80%] h-[4%] object-cover shadow-sm"
+          aria-hidden="true"
+        />
+        <img
+          src="/scrapbook/glitter-star.png"
+          alt=""
+          class="pointer-events-none absolute -left-[15%] top-[0%] w-[30%] -rotate-15"
+          aria-hidden="true"
+        />
+        <img
+          src="/scrapbook/glitter-star-2.png"
+          alt=""
+          class="pointer-events-none absolute -right-[10%] top-[45%] w-[20%] rotate-15 z-2"
+          aria-hidden="true"
+        />
+        <app-language-switch
+          [language]="language()"
+          [label]="copy().languageLabel"
+          (languageChange)="setLanguage($event)"
+        />
 
-    <header class="flex justify-center" data-reveal>
-      <img
-        src="/shibabox-logo.png"
-        alt="Shibabox"
-        class="h-[26dvh] min-h-24 w-auto max-w-full max-sm:max-h-40 sm:max-h-56"
-      />
-    </header>
-
-    <nav class="mt-4 flex flex-col gap-2.5 sm:mt-5" aria-label="Shibabox links" data-reveal>
-      @for (link of links; track link.key) {
-        <a
-          class="group flex h-14 w-full items-center gap-3 rounded-2xl px-4 no-underline shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-shiba-brown sm:h-16 sm:gap-4 sm:px-5"
-          [class]="link.colors"
-          [href]="link.href"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <header class="absolute inset-0" data-reveal>
           <img
-            [src]="link.icon"
-            alt=""
-            class="size-6 shrink-0 sm:size-7"
-            aria-hidden="true"
+            src="/shibabox-logo.png"
+            alt="Shibabox"
+            class="absolute left-[25%] top-[10%] -translate-x-1/2 h-auto w-[35%] select-none drop-shadow-sm"
           />
-          <span
-            class="language-copy min-w-0 flex-1 text-[0.95rem] font-black leading-tight sm:text-base"
-          >
-            {{ link.label[language()] }}
-          </span>
-          <span
-            class="text-lg opacity-60 transition-transform duration-200 group-hover:translate-x-0.5 sm:text-xl"
-            aria-hidden="true"
-          >
-            ↗
-          </span>
-        </a>
-      }
-    </nav>
-  </article>
+          <img
+            src="/scrapbook/approved.png"
+            alt="Shiba-approved"
+            class="absolute left-[25%] top-[43%] -translate-x-1/2 h-auto w-[30%] select-none drop-shadow-sm"
+          />
+          <div class="absolute left-[45%] top-[10%] h-[50%] w-[50%] px-7 py-7">
+            <img
+              src="/scrapbook/note.png"
+              alt=""
+              class="pointer-events-none absolute inset-0 h-full w-full object-fill drop-shadow-md"
+              aria-hidden="true"
+            />
+            <div class="inset-0 relative z-[1]">
+              <h1 class="language-copy text-lg font-semibold leading-tight">
+                {{ copy().introTitle }}
+              </h1>
+              <p class="language-copy mt-2 text-xs leading-relaxed text-shiba-brown/75">
+                {{ copy().introText }}
+              </p>
+            </div>
+          </div>
+        </header>
+
+        <nav
+          class="absolute bottom-[4%] left-[5%] right-[5%] flex flex-col gap-2"
+          aria-label="Shibabox links"
+          data-reveal
+        >
+          @for (link of links; track link.key) {
+            <a
+              class="group flex h-[3.75rem] w-full items-center gap-3 rounded-lg bg-white/70 px-5 text-shiba-brown no-underline shadow-sm ring-1 ring-inset ring-shiba-sand/35 transition duration-200 hover:-translate-y-0.5 hover:rotate-0 hover:bg-shiba-honey/20 hover:shadow-md active:translate-y-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-shiba-brown"
+              [class]="link.classes"
+              [href]="link.href"
+              [attr.target]="link.external ? '_blank' : null"
+              [attr.rel]="link.external ? 'noopener noreferrer' : null"
+            >
+              <img [src]="link.icon" alt="" class="size-6 shrink-0" aria-hidden="true" />
+              <span class="language-copy min-w-0 flex-1 text-[0.95rem] font-normal leading-tight">
+                {{ link.label[language()] }}
+              </span>
+              <span
+                class="text-lg opacity-60 transition-transform duration-200 group-hover:translate-x-0.5"
+                aria-hidden="true"
+              >
+                ↗
+              </span>
+            </a>
+          }
+        </nav>
+      </article>
+    </div>
+  </div>
 </main>
